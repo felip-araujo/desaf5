@@ -1,21 +1,30 @@
-<div class="container">
-  <h1>{{ title }}</h1>
+<div class="container mx-auto p-6">
+  <h1 class="text-3xl font-bold text-center mb-6">{{ title }}</h1>
 
   <!-- Lista de Posts -->
-  <h2>Posts</h2>
-  <ul>
-    <li *ngFor="let post of posts">
-      <h3>{{ post.title }}</h3>
-      <p>{{ post.body }}</p>
+  <h2 class="text-2xl font-semibold mb-4">Posts</h2>
+  <ul class="space-y-4">
+    <li
+      *ngFor="let post of posts"
+      class="p-4 bg-white shadow-md rounded-lg border border-gray-200 hover:shadow-lg transition-shadow"
+    >
+      <h3 class="text-lg font-bold text-gray-800 mb-2">{{ post.title }}</h3>
+      <p class="text-gray-600">{{ post.body }}</p>
     </li>
   </ul>
 
   <!-- Lista de Comentários -->
-  <h2>Comentários</h2>
-  <ul>
-    <li *ngFor="let comentario of comentarios">
-      <strong>{{ comentario.name }}</strong> - {{ comentario.email }}
-      <p>{{ comentario.body }}</p>
+  <h2 class="text-2xl font-semibold mt-8 mb-4">Comentários</h2>
+  <ul class="space-y-4">
+    <li
+      *ngFor="let comentario of comentarios"
+      class="p-4 bg-white shadow-md rounded-lg border border-gray-200 hover:shadow-lg transition-shadow"
+    >
+      <div class="flex items-center justify-between mb-2">
+        <strong class="text-sm font-medium text-gray-700">{{ comentario.name }}</strong>
+        <span class="text-xs text-gray-500">{{ comentario.email }}</span>
+      </div>
+      <p class="text-gray-600">{{ comentario.body }}</p>
     </li>
   </ul>
 </div>

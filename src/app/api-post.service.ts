@@ -19,5 +19,4 @@ export class ApiPostService {
     return this.http.get(url);
   }
 
-
 }

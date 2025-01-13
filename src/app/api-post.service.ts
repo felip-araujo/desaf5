@@ -9,12 +9,12 @@ export class ApiPostService {
   private ApiUrl = 'https://jsonplaceholder.typicode.com/';
 
   constructor(private http: HttpClient) { }
-  getPosts(id: number): Observable<any> {
+  getPosts(): Observable<any> {
     const url = `${this.ApiUrl}/posts`
     return this.http.get(url);
   }
 
-  getComentarios(id: number): Observable<any> {
+  getComentarios(): Observable<any> {
     const url = `${this.ApiUrl}/comments`
     return this.http.get(url);
   }

@@ -15,15 +15,25 @@ export class AppComponent implements OnInit {
 
   posts: any[] = [];
   comentarios: any[] = [];
+  postsComComentarios: any[] = [];
 
   constructor(private ApiPostService: ApiPostService) { }
-  ngOnInit(): void {
-    this.ApiPostService.getPosts(1).subscribe((data) => {
-      this.posts = data;
-    });
 
-    this.ApiPostService.getComentarios(1).subscribe((data) => {
-      this.comentarios = data;
+  ngOnInit(): void {
+    this.ApiPostService.getPosts().subscribe((postsData) => {
+      this.posts = postsData;
+
+      this.ApiPostService.getComentarios().subscribe((comentariosData) => {
+        this.comentarios = comentariosData;
+
+        this.postsComComentarios = this.posts.map((post) => ({
+          ...post,
+          comentarios: this.comentarios.filter(
+            (comentario) => comentario.postId === post.id
+          ),
+
+        }));
+      });
     });
 
   }

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ApiPostService } from './api-post.service';
+
 
 @Component({
   selector: 'app-root',
@@ -6,6 +8,11 @@ import { Component } from '@angular/core';
   standalone: false,
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'desaf5';
+export class AppComponent implements OnInit {
+  constructor (private ApiPostService: ApiPostService){}
+  ngOnInit(): void {
+    this.ApiPostService.getPosts(1).subscribe((data) => {
+      console.log(data);
+    });
+  }
 }

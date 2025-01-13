@@ -13,4 +13,11 @@ export class ApiPostService {
     const url = `${this.ApiUrl}/posts`
     return this.http.get(url);
   }
+
+  getComentarios(id: number): Observable<any> {
+    const url = `${this.ApiUrl}/comments`
+    return this.http.get(url);
+  }
+
+
 }

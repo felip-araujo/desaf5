@@ -50,17 +50,27 @@ export class AppComponent implements OnInit {
     this.isEditModalOpen = false;
   }
 
-  // Salvar as edições feitas no post
-  savePost() {
-    // Atualizar o post na lista com os novos dados
-    const index = this.postsComComentarios.findIndex(
-      (post) => post.id === this.currentPost.id
-    );
-    if (index !== -1) {
-      this.postsComComentarios[index] = { ...this.currentPost };
-    }
+   // Salvar as edições feitas no post
+   savePost() {
+    // Enviar a requisição PUT para atualizar o post na API
+    this.ApiPostService.updatePost(this.currentPost).subscribe(
+      (updatedPost) => {
+        // Atualizar a lista de posts localmente
+        const index = this.postsComComentarios.findIndex(
+          (post) => post.id === this.currentPost.id
+        );
+        if (index !== -1) {
+          this.postsComComentarios[index] = { ...updatedPost }; // Atualizando post na lista
+          this.posts[index] = { ...updatedPost }; // Atualizando post também na lista original
+        }
 
-    this.closeEditModal();
+        // Fechar o modal de edição
+        this.closeEditModal();
+      },
+      (error) => {
+        console.error('Erro ao atualizar o post:', error);
+      }
+    );
   }
 
   // Excluir um post

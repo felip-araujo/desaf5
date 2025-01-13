@@ -19,4 +19,9 @@ export class ApiPostService {
     return this.http.get(url);
   }
 
+  updatePost(post: any): Observable<any> {
+    const url = `${this.ApiUrl}/posts/${post.id}`;
+    return this.http.put(url, post); // Usando PUT para atualizar o post
+  }
+
 }

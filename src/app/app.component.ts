@@ -11,7 +11,7 @@ import { ApiPostService } from './api-post.service';
 
 export class AppComponent implements OnInit {
 
-  title = 'Desaf5'
+  title = 'Lista de Posts'
 
   posts: any[] = [];
   comentarios: any[] = [];

@@ -4,27 +4,30 @@
   <!-- Lista de Posts -->
   <h2 class="text-2xl font-semibold mb-4">Posts</h2>
   <ul class="space-y-4">
-    <li
-      *ngFor="let post of postsComComentarios; let i = index"
-      class="p-4 bg-white shadow-md rounded-lg border border-gray-200 hover:shadow-lg transition-shadow"
-    >
+    <li *ngFor="let post of postsComComentarios; let i = index"
+      class="p-4 bg-white shadow-md rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
       <h3 class="text-lg font-bold text-gray-800 mb-2">{{ post.title }}</h3>
       <p class="text-gray-600">{{ post.body }}</p>
 
       <!-- Botões de Editar e Excluir -->
       <div class="flex justify-end space-x-4 mt-4">
-        <button
-          (click)="openEditModal(post)"
-          class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-        >
+        <button (click)="openEditModal(post)" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
           Editar
         </button>
-        <button
-          (click)="deletePost(i)"
-          class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-        >
+        <button (click)="deletePost(i)" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
           Excluir
         </button>
+      </div>
+
+      <!-- Exibição dos Comentários -->
+      <div *ngIf="post.comentarios && post.comentarios.length > 0" class="mt-4">
+        <h4 class="text-xl font-semibold">Comentários</h4>
+        <ul class="space-y-2">
+          <li *ngFor="let comentario of post.comentarios" class="p-2 bg-gray-100 rounded-md shadow-sm">
+            <strong class="text-sm font-medium">{{ comentario.name }}</strong>
+            <p class="text-gray-700">{{ comentario.body }}</p>
+          </li>
+        </ul>
       </div>
     </li>
   </ul>
@@ -36,31 +39,18 @@
     <h2 class="text-2xl font-semibold mb-4">Editar Post</h2>
     <div>
       <label class="block text-sm font-medium text-gray-700" for="title">Título</label>
-      <input
-        id="title"
-        type="text"
-        [(ngModel)]="currentPost.title"
-        class="w-full p-2 border border-gray-300 rounded-md mb-4"
-      />
+      <input id="title" type="text" [(ngModel)]="currentPost.title"
+        class="w-full p-2 border border-gray-300 rounded-md mb-4" />
 
       <label class="block text-sm font-medium text-gray-700" for="body">Corpo</label>
-      <textarea
-        id="body"
-        [(ngModel)]="currentPost.body"
-        class="w-full p-2 border border-gray-300 rounded-md mb-4"
-      ></textarea>
+      <textarea id="body" [(ngModel)]="currentPost.body"
+        class="w-full p-2 border border-gray-300 rounded-md mb-4"></textarea>
 
       <div class="flex justify-end space-x-4">
-        <button
-          (click)="savePost()"
-          class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
-        >
+        <button (click)="savePost()" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
           Salvar
         </button>
-        <button
-          (click)="closeEditModal()"
-          class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
-        >
+        <button (click)="closeEditModal()" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">
           Cancelar
         </button>
       </div>
